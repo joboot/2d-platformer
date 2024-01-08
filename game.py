@@ -1,7 +1,7 @@
 import sys
 import pygame
 
-from scripts.entities import PhysicsEntity, Player
+from scripts.entities import PhysicsEntity, Player, Enemy
 from scripts.utils import load_image, load_images, Animation
 from scripts.tilemap import Tilemap
 from scripts.clouds import Clouds
@@ -34,7 +34,9 @@ class Game:
             'player/run': Animation(load_images('entities/player/run'), img_duration=4),
             'player/jump': Animation(load_images('entities/player/jump')),
             'player/slide': Animation(load_images('entities/player/slide')),
-            'player/wall_slide': Animation(load_images('entities/player/wall_slide'))
+            'player/wall_slide': Animation(load_images('entities/player/wall_slide')),
+            'enemy/idle': Animation(load_images('entities/enemy/idle'), img_duration=6),
+            'enemy/run': Animation(load_images('entities/enemy/run'), img_duration=4)
             # 'player': load_image('player/AssetPack-V1/SpriteSheets/player2.png')
         }
 
@@ -46,6 +48,7 @@ class Game:
 
         # Create tilemap
         self.tilemap = Tilemap(self)
+        self.tilemap.load('map.json')
 
         # Camera
         self.scroll = [0, 0]
@@ -74,6 +77,8 @@ class Game:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+
+
                 # Movement controller
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_a:
