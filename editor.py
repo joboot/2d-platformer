@@ -75,7 +75,9 @@ class Editor:
                 self.display.blit(current_tile_img, mpos)
 
             if self.clicking and self.on_grid:
-                self.tilemap.tilemap[str(tile_pos[0]) + ';' + str(tile_pos[1])] = {'type': self.tile_list[self.tile_group], 'variant': self.tile_variant, 'pos': tile_pos}
+                self.tilemap.tilemap[str(tile_pos[0]) + ';' +
+                                     str(tile_pos[1])] = {'type': self.tile_list[self.tile_group],
+                                                          'variant': self.tile_variant, 'pos': tile_pos}
 
             if self.right_clicking:
                 tile_loc = str(tile_pos[0]) + ';' + str(tile_pos[1])
